@@ -7,7 +7,6 @@ import re
 import string
 import sys
 import time
-from pprint import pprint
 from consle_width import getTerminalSize
 
 
@@ -166,23 +165,14 @@ class SubDomain(object):
     def run(self):
         try:
             self.loop.run_until_complete(self._run())
-            # self.loop.run_until_complete(asyncio.gather(*tasks))
         except Exception as e:
             print(e)
-        # filename = self.domain + '_' + time.strftime('%y%m%d_%H%M%S', time.localtime()) + '.txt'
-        # with open(filename, 'w') as f:
-        #     for domain, ips in self.data.items():
-        #         f.write('%-30s%-s\n' % (domain, ','.join(ips)))
-        # time_consume = time.time() - start_time
-        # pprint('Time consume: {tc}s'.format(tc=round(time_consume, 3)))
         msg = "%s Found| %s scanned in %.1f seconds" % (
             self.found_count, self.scan_count, time.time() - self.start_time)
         print(msg)
 
 
 if __name__ == "__main__":
-    # s = SubDomain('qq.com')
-    # s.run()
     parser = argparse.ArgumentParser(epilog='\tExample: \r\npython ' + sys.argv[0] + " -d qq.com")
     parser._optionals.title = "OPTIONS"
     parser.add_argument('-d', '--domain', dest='domain', help="Target Domain", required=True)
